@@ -1,21 +1,21 @@
-
 <nav>
-    <a href="/">home</a>
+  <a href="/">home</a>
 </nav>
 
 <h2>Available drones</h2>
 
-
 <ul>
 
-{{#each drones}}
-<li>
-<h2>{{this.name}}</h2>
-<p>Propellers: {{this.propellers}}</p>
-<p>Max Speed: {{this.maxSpeed}}</p>
-</li>
-{{/each}}
-
-
+  {{#each drones}}
+    <li>
+      <h2>{{this.name}}</h2>
+      <p>Propellers: {{this.propellers}}</p>
+      <p>Max Speed: {{this.maxSpeed}}</p>
+      <a href="/drones/{{this._id}}/edit">Edit</a>
+      <form action="/drones/{{_id}}/delete" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  {{/each}}
 
 </ul>

@@ -47,7 +47,7 @@ router.post('/drones/create', async (req, res, next) => {
       });
     }
 
-    // Create a new drone using the provided data
+   
     const newDrone = new Drone({ name, propellers, maxSpeed });
     await newDrone.save();
 
@@ -62,19 +62,48 @@ router.post('/drones/create', async (req, res, next) => {
 
 });
 
-router.get('/drones/:id/edit', (req, res, next) => {
+router.get('/drones/:id/edit', async (req, res, next) => {
   // Iteration #4: Update the drone
   // ... your code here
+
+  try {
+    const drone = await Drone.findById(req.params.id);
+    res.render('drones/update-form.hbs', { drone });
+  } catch (error) {
+    next(error);
+  }
+
+
+  
 });
 
-router.post('/drones/:id/edit', (req, res, next) => {
+router.post('/drones/:id/edit', async (req, res, next) => {
   // Iteration #4: Update the drone
   // ... your code here
+  const { name, propellers, maxSpeed } = req.body;
+
+  try {
+    await Drone.findByIdAndUpdate(req.params.id, {
+      name: name,
+      propellers: propellers,
+      maxSpeed: maxSpeed,
+    });
+    res.redirect('/drones');
+  } catch (error) {
+    next(error);
+  }
+ 
 });
 
-router.post('/drones/:id/delete', (req, res, next) => {
+router.post('/drones/:id/delete', async (req, res, next) => {
   // Iteration #5: Delete the drone
   // ... your code here
+  try{
+await Drone.findByIdAndDelete(req.params.id)
+res.redirect("/drones")
+  } catch(error){
+    next(error)
+  }
 });
 
 module.exports = router;

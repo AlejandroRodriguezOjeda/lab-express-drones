@@ -1,1 +1,31 @@
-<h2>Create a new drone</h2>
+<div>
+  <h3>Create Drone Form</h3>
+
+  <form action="/drones/create" method="post">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input class="form-control" type="text" name="name" value="{{this.previousFormData.name}}">
+    </div>
+
+    <div class="mb-3">
+      <label for="propellers" class="form-label">Propellers</label>
+      <input class="form-control" type="number" name="propellers" value="{{this.previousFormData.propellers}}">
+    </div>
+
+    <div class="mb-3">
+      <label for="maxSpeed" class="form-label">Max Speed</label>
+      <input class="form-control" type="number" name="maxSpeed" value="{{this.previousFormData.maxSpeed}}">
+    </div>
+
+    <button class="btn btn-outline-info add-btn">Add</button>
+
+    {{#if this.errorMessage}}
+      <p class="alert alert-danger">{{this.errorMessage}}</p>
+    {{/if}}
+
+  </form>
+</div>
+
+
+
